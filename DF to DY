@@ -1,0 +1,11 @@
+#convert Dataframe into Dynamicframe
+
+from awsglue.context import GlueContext
+from pyspark.context import SparkContext
+spark_context = SparkContext.getOrCreate()
+glue_context = GlueContext(spark_context)
+database_name = "your_database_name"
+table_name = "your_table_name"
+dyf = glue_context.create_dynamic_frame.from_catalog(database=database_name, table_name=table_name)
+df = dyf.toDF()
+
